@@ -1,4 +1,4 @@
-package ru.hh.school.unittesting.example;
+package ru.hh.school.unittesting.homework;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,9 +7,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.hh.school.unittesting.homework.LibraryManager;
-import ru.hh.school.unittesting.homework.NotificationService;
-import ru.hh.school.unittesting.homework.UserService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -98,12 +95,14 @@ class LibraryManagerTest {
         () -> libraryManager.calculateDynamicLateFee(-1, false, false));
   }
 
+
   @ParameterizedTest
   @CsvSource({
       "4, false, false, 2.00",
       "4, true,  false, 3.00",
       "4, false, true,  1.60",
-      "4, true,  true,  2.40"
+      "4, true,  true,  2.40",
+      "0, true, true, 0.0"
   })
   void calculateDynamicLateFeeParameterized(int days, boolean bestseller, boolean premium, double expected) {
     assertEquals(expected, libraryManager.calculateDynamicLateFee(days, bestseller, premium));
